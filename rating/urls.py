@@ -8,7 +8,6 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('profile/<int:user_id>', views.profile, name='profile'),
     path('project/<int:id>', views.project, name='project'),
-    path('edit_profile', views.edit_profile, name='edit_profile'),
     path('upload', views.upload, name='upload'),
     path('search', views.search, name='search'),
     path('api/posts/', views.PostList.as_view()),

@@ -15,10 +15,11 @@
         </div>
     </form>
     <nav>
-        <a href="{% url 'feed' %}"><i class='fas fa-house-user'></i></a>
+        <a href="{% url 'home' %}"><i class='fas fa-house-user'></i></a>
         <a href="{% url 'upload' %}"><i class='fas fa-folder-plus'></i></a>
         <div id="user">
-            <a href="{% url 'profile' %}">
+            {% for item in users %}
+            <a href="{% url 'profile/{{item.id}}' %}">{% endfor %}
                 <img src="{{user.profile.photo.url}}">
             </a>
         </div>

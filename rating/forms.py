@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile, Post, Rating
+from .models import Post, Rating
 
 class uploadForm(forms.ModelForm):
     class Meta:

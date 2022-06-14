@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
+from rest_framework.response import Response
 from .models import Post, Profile, Rating
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import uploadForm, rateProject
 # from django.db.models import Avg
-from rest_framework.response import Response
+from rest_framework import generics
 from rest_framework.views import APIView
 from .serializer import PostSerializer, ProfileSerializer
 
