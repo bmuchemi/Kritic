@@ -18,10 +18,10 @@
         <a href="{% url 'home' %}"><i class='fas fa-house-user'></i></a>
         <a href="{% url 'upload' %}"><i class='fas fa-folder-plus'></i></a>
         <div id="user">
-            {% for item in users %}
-            <a href="{% url 'profile/{{item.id}}' %}">{% endfor %}
-                <img src="{{user.profile.photo.url}}">
-            </a>
+            {% for user in users %}
+            <a href="profile/{{user.id}}">
+                <img src="{{user.photo.url}}">
+            </a>{% endfor %}
         </div>
     </nav>
 </header>
