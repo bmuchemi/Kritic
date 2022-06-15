@@ -4,8 +4,6 @@ from .models import Post, Profile, Rating
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import uploadForm, rateProject
-# from django.db.models import Avg
-from rest_framework import generics
 from rest_framework.views import APIView
 from .serializer import PostSerializer, ProfileSerializer
 
@@ -14,16 +12,17 @@ from .serializer import PostSerializer, ProfileSerializer
 @login_required(login_url='/accounts/login/')
 def home(request):
     ''' method to display all posts '''
+    person = User.objects.filter(id=request.user.id)
     pictures = Post.objects.all()
 
-    return render(request, 'home.html',{'pictures':pictures})
+    return render(request, 'home.html',{'pictures':pictures, 'person':person})
 
 @login_required(login_url='/accounts/login/')
 def profile(request,user_id):  
     users = User.objects.filter(id=user_id)   
     pics = Post.objects.filter(profile=user_id).all()
 
-    return render(request, 'profile.html', {'users':users, 'pics':pics})
+    return render(request, 'profile.html',{'users':users, 'pics':pics})
 
 
 @login_required(login_url='/accounts/login/')
