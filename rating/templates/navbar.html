@@ -1,10 +1,26 @@
 {% load static %}
 <style>
+.material-symbols-outlined {
+    width: 70px;
+    padding: 0px;
+  font-variation-settings:
+  'FILL' 100,
+  'wght' 4000,
+  'GRAD' 0,
+  'opsz' 48;
+}
+
+</style>
     .btn-default {
         display: none;
     }
 </style>
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+</head>
 <header>
+
     <h1>KRITIC</h1>
     <form class="navbar-form" role="search" action="{% url 'search' %}">
         <div class="input-group">
@@ -15,13 +31,20 @@
         </div>
     </form>
     <nav>
-        <a href="{% url 'home' %}"><i class='fas fa-house-user'></i></a>
-        <a href="{% url 'upload' %}"><i class='fas fa-folder-plus'></i></a>
-        <div id="user">
-            {% for user in users %}
-            <a href="profile/{{user.id}}">
-                <img src="{{user.photo.url}}">
-            </a>{% endfor %}
-        </div>
+        <a href="{% url 'home' %}"><span class="material-symbols-outlined"> home</span></a>
+        <br>
+        <hr>
+        <a href="{% url 'upload' %}"><span class="material-symbols-outlined">
+            upload
+        </span>
+        </a>
+            <div class="user">
+                {% for item in person %}
+                <a href="profile/{{item.id}}"> {% endfor %}
+                    <span class="material-symbols-outlined">
+                        account_circle
+                    </span>
+                </a>
+            </div>
     </nav>
 </header>

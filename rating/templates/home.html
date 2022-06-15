@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 <!--  -->
 {% block content %}
+<style>
+    h1 {
+        font-size: 140%;
+        font-weight: bold;
+        color: black;
+    }
+</style>
 <main>
     <div class="container">
         {% for item in pictures %}
@@ -8,6 +15,7 @@
             <a href="project/{{item.id}}">
                 <img alt="project post" src="{{item.image.url}}">
             </a>
+            <h1>{{item.title}}</h1>
         </div>
         {% endfor %}
     </div>
