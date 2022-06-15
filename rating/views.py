@@ -28,7 +28,8 @@ def profile(request,user_id):
 
 @login_required(login_url='/accounts/login/')
 def project(request, id):
-    users = User.objects.filter(id=request.user.id)
+    # users = Profile.objects.filter(id=request.user.id)
+    users = request.user.profile
     project = Post.objects.filter(id=id).all()
     rate = Rating.objects.filter(post=id).first()
     if Rating.objects.filter(user=users, post=id).first() is None : #user has not voted

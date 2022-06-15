@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'rating',
     'rest_framework',
     'bootstrap4',
+    'django_registration',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
