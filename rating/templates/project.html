@@ -6,42 +6,44 @@
 <!--  -->
 {% block content %}
 <main>
-    {% for item in post %}
+    {% for item in project %}
     <div class="feature">
         <h3><u>{{item.title}}</u></h3>
         <a href="{{item.link_url}}" target="_blank">
             <img class="image" src="{{item.image.url}}" alt="{{item.title}}" width=70%>
         </a>
         <p>{{item.description}}</p>
-
         <hr>
-
-        <div>
-            <form action="#" method="POST" class="row">
-                <h2>VOTING FORM</h2>
-                {%csrf_token%}
-                <div class="row">
-                    <div class="col-md">
-                        {{ form.design|as_crispy_field:"bootstrap" }}
-                    </div>
-                    <br>
-                    <div class="col">
-                        {{ form.usability|as_crispy_field:"bootstrap" }}
-                    </div>
-                    <br>
-                    <div class="col">
-                        {{ form.content|as_crispy_field:"bootstrap" }}
-                    </div>
-                </div>
-                <br>
-                <input type="submit" class="btn btn-success" value="Post">
-            </form>
-            <hr>
-
-            {% if average %} {% for total in average %} {{total.avg_interface}} {{total.avg_experience}} {{total.avg_content}} {% endfor %} {% else %}
-            <p>You are yet to vote on this project</p> {% endif %}
-        </div>
     </div>
+    <!-- Voting form -->
+    <div class="container">
+        <div class="row">
+            <div class="offset-3 col-md-6 offset-3">
+                <h2 class="text-center mt-3 mb-2">VOTE</h2>
+                <form action="#" method="POST">
+                    {%csrf_token%} {% crispy form%}
+                    <input type="submit" class="btn btn-success" value="">
+                </form>
+            </div>
+        </div>
+    <!-- <div>
+        <form action="#" method="POST">
+            <h2>VOTING FORM</h2>
+            {%csrf_token%}
+                <div class="form-group">
+                    {{ form.design|as_crispy_field:"bootstrap" }}
+                </div>
+                <div class="form-group">
+                    {{ form.usability|as_crispy_field:"bootstrap" }}
+                </div>
+                <div class="form-group">
+                    {{ form.content|as_crispy_field:"bootstrap" }}
+                </div>
+            <input type="submit" class="btn btn-success" value="">
+        </form>
+         {% if average %} {% for total in average %} {{total.avg_interface}} {{total.avg_experience}} {{total.avg_content}} {% endfor %} {% else %}
+        <p>You are yet to vote on this project</p> {% endif %}
+    </div> -->
     {% endfor %}
 </main>
 {% endblock %}
