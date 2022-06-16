@@ -27,23 +27,33 @@ def profile(request,user_id):
 
 @login_required(login_url='/accounts/login/')
 def project(request, id):
-    # users = Profile.objects.filter(id=request.user.id)
     users = request.user.profile
     project = Post.objects.filter(id=id).all()
     rate = Rating.objects.filter(post=id).first()
-    if Rating.objects.filter(user=users, post=id).first() is None : #user has not voted
+    if Rating.objects.filter(user=users, post=id).first() is None : 
         if request.method == 'POST':
             form = rateProject(request.POST)
             if form.is_valid():
                 rate = form.save(commit=False)
-                rate.user = users
                 rate.post = project
+                rate.user = users
                 rate.save()
-            return redirect('project')
+                return redirect('project')
         else:
             form = rateProject()
-        return render(request, 'project.html', {'post':project, 'rate':rate, 'form':form})
-
+        return render(request, 'project.html', {'project':project, 'form':form, 'rate':rate})
+    # if Rating.objects.filter(user=users, post=id).first() is None : 
+    #     if request.method == 'POST':
+    #         form = rateProject(request.POST)
+    #         if form.is_valid():
+    #             rate = form.save(commit=False)
+    #             rate.user = users
+    #             rate.post = project
+    #             rate.save()
+    #         return redirect('project')
+    #     else:
+    #         form = rateProject()
+    #     return render(request, 'project.html', {'post':project, 'rate':rate, 'form':form})
 
 # @login_required(login_url='/accounts/login/')
 # def edit_profile(request):
@@ -69,6 +79,7 @@ def upload(request):
         return redirect('home')
     else:
         form = uploadForm()
+
     return render(request, 'upload.html', {'form':form})
 
 def search(request):
