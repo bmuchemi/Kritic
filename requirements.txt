@@ -4,8 +4,11 @@ beautifulsoup4==4.11.1
 certifi==2022.5.18.1
 charset-normalizer==2.0.12
 confusable-homoglyphs==3.2.0
+dj-database-url==0.5.0
 Django==4.0.5
 django-bootstrap4==22.1
+django-crispy-forms==1.14.0
+django-heroku==0.3.1
 django-registration==3.3
 djangorestframework==3.13.1
 idna==3.3
