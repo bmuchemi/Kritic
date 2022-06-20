@@ -18,15 +18,17 @@ def home(request):
     return render(request, 'home.html',{'pictures':pictures, 'person':person})
 
 @login_required(login_url='/accounts/login/')
-def profile(request,user_id):  
+def profile(request,user_id): 
+    person = User.objects.filter(id=request.user.id) 
     users = User.objects.filter(id=user_id)   
     pics = Post.objects.filter(profile=user_id).all()
 
-    return render(request, 'profile.html',{'users':users, 'pics':pics})
+    return render(request, 'profile.html',{'users':users, 'pics':pics,'person':person})
 
 
 @login_required(login_url='/accounts/login/')
 def project(request, id):
+    person = User.objects.filter(id=request.user.id)
     users = request.user.profile
     project = Post.objects.filter(id=id).all()
     rate = Rating.objects.filter(post=id).first()
@@ -41,7 +43,7 @@ def project(request, id):
                 return redirect('project')
         else:
             form = rateProject()
-        return render(request, 'project.html', {'project':project, 'form':form, 'rate':rate})
+        return render(request, 'project.html', {'project':project, 'form':form, 'rate':rate, 'person':person})
     # if Rating.objects.filter(user=users, post=id).first() is None : 
     #     if request.method == 'POST':
     #         form = rateProject(request.POST)
@@ -69,7 +71,7 @@ def project(request, id):
     
 @login_required(login_url='/accounts/login/')
 def upload(request):
-    users = User.objects.filter(id=request.user.id)
+    users = request.user.profile
     if request.method == 'POST':
         form = uploadForm(request.POST, request.FILES)
         if form.is_valid():
